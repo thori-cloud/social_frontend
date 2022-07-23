@@ -3,7 +3,7 @@
 const upload = require("./upload").default;
 const BASE_URL = process.env.BASE_URL;
 
-function finalize(user) {
+export function finalize(user) {
   localStorage.setItem("user", JSON.stringify(user));
   window.location.href = "/feeds";
 }
@@ -12,7 +12,7 @@ export function getCurrentUser() {
   return JSON.parse(localStorage.getItem("user"));
 }
 
-async function getUserById(userId) {
+export async function getUserById(userId) {
   try {
     const res = await fetch(`${BASE_URL}users/` + userId, {
       method: "GET",
@@ -33,7 +33,7 @@ async function getUserById(userId) {
   }
 }
 
-async function register(username, email, password, fullname) {
+export async function register(username, email, password, fullname) {
   try {
     const user = await fetch(`${BASE_URL}auth/register`, {
       method: "POST",
@@ -58,7 +58,7 @@ async function register(username, email, password, fullname) {
   }
 }
 
-async function login(email, password) {
+export async function login(email, password) {
   const user = await fetch(`${BASE_URL}auth/login`, {
     method: "POST",
     headers: {
@@ -76,7 +76,7 @@ async function login(email, password) {
   }
 }
 
-async function updateUser(userId, file, fullname, bio) {
+export async function updateUser(userId, file, fullname, bio) {
   var image_url = "";
 
   const newUser = {
@@ -110,7 +110,7 @@ async function updateUser(userId, file, fullname, bio) {
   }
 }
 
-function logout() {
+export function logout() {
   localStorage.removeItem("user");
   window.location.href = "/login";
 }
