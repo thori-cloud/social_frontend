@@ -8,7 +8,7 @@ function finalize(user) {
   window.location.href = "/feeds";
 }
 
-function getCurrentUser() {
+export function getCurrentUser() {
   return JSON.parse(localStorage.getItem("user"));
 }
 
@@ -119,7 +119,6 @@ module.exports = {
   register,
   login,
   logout,
-  getCurrentUser,
   getUserById,
   updateUser,
 };
