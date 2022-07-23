@@ -1,5 +1,8 @@
 import upload from "./upload";
 import { getCurrentUser } from "./user";
+require("dotenv").config();
+const BASE_URL = process.env.BASE_URL;
+
 
 async function uploadPost(file, caption) {
   const user = await getCurrentUser();
@@ -14,7 +17,7 @@ async function uploadPost(file, caption) {
     image: image_url,
   };
   try {
-    const res = await fetch("http://localhost:5000/posts", {
+    const res = await fetch(`${BASE_URL}posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +40,7 @@ async function uploadPost(file, caption) {
 async function getPosts(userId) {
   try {
     console.log("userId:", userId);
-    const res = await fetch("http://localhost:5000/posts/timeline/" + userId, {
+    const res = await fetch(`${BASE_URL}posts/timeline/` + userId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +62,7 @@ async function getPosts(userId) {
 async function likePost(postId, userId) {
   try {
     const res = await fetch(
-      "http://localhost:5000/posts/like/" + userId + "/" + postId,
+      `${BASE_URL}posts/like/` + userId + "/" + postId,
       {
         method: "PUT",
         headers: {
@@ -82,7 +85,7 @@ async function likePost(postId, userId) {
 
 async function getPostByUserId(userId) {
   try {
-    const res = await fetch("http://localhost:5000/posts/profile/" + userId, {
+    const res = await fetch(`${BASE_URL}posts/profile/` + userId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +106,7 @@ async function getPostByUserId(userId) {
 
 async function getPostById(postId) {
   try {
-    const res = await fetch("http://localhost:5000/posts/" + postId, {
+    const res = await fetch(`${BASE_URL}posts/` + postId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +127,7 @@ async function getPostById(postId) {
 
 async function commentPost(postId, text, username) {
   try {
-    const res = await fetch("http://localhost:5000/posts/comment/" + postId, {
+    const res = await fetch(`${BASE_URL}posts/comment/` + postId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

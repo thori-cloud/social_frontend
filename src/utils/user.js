@@ -1,6 +1,8 @@
 // TODO: Check if the user already exist before registering
 // TODO: Chack if there is any error in login (Maybe because of wrong password)
 const upload = require("./upload").default;
+require("dotenv").config();
+const BASE_URL = process.env.BASE_URL;
 
 function finalize(user) {
   localStorage.setItem("user", JSON.stringify(user));
@@ -13,7 +15,7 @@ function getCurrentUser() {
 
 async function getUserById(userId) {
   try {
-    const res = await fetch("http://localhost:5000/users/" + userId, {
+    const res = await fetch(`${BASE_URL}users/` + userId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +36,7 @@ async function getUserById(userId) {
 
 async function register(username, email, password, fullname) {
   try {
-    const user = await fetch("http://localhost:5000/auth/register", {
+    const user = await fetch(`${BASE_URL}auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +60,7 @@ async function register(username, email, password, fullname) {
 }
 
 async function login(email, password) {
-  const user = await fetch("http://localhost:5000/auth/login", {
+  const user = await fetch(`${BASE_URL}auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +90,7 @@ async function updateUser(userId, file, fullname, bio) {
     newUser["profilePicture"] = image_url;
   }
   try {
-    const res = await fetch("http://localhost:5000/users/" + userId, {
+    const res = await fetch(`${BASE_URL}users/` + userId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
