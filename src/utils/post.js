@@ -1,6 +1,5 @@
 import upload from "./upload";
 import { getCurrentUser } from "./user";
-require("dotenv").config();
 const BASE_URL = process.env.BASE_URL;
 
 

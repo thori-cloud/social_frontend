@@ -1,7 +1,6 @@
 // TODO: Check if the user already exist before registering
 // TODO: Chack if there is any error in login (Maybe because of wrong password)
 const upload = require("./upload").default;
-require("dotenv").config();
 const BASE_URL = process.env.BASE_URL;
 
 function finalize(user) {
